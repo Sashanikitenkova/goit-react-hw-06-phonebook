@@ -5,25 +5,23 @@ import { nanoid } from "nanoid";
     name: 'contacts',
 
     initialState: {
-      contacts: {
-        items: [],
-        filter: ''
-      }
+      contacts: [],
     },
 
     reducers: {
       addContact(state, action) {
-        console.log(state);
+        // console.log(state);
         console.log(action);
 
 
-        state.contacts.items.push({ 
-          id: nanoid(), 
-          name: action.payload.name, 
-          number: action.payload.number,
-        })
+        state.contacts.push({ 
+            id: nanoid(),
+            name: action.payload.name, 
+            number: action.payload.number,
+          })
       },
       removeContact(state, action) {
+        state.contacts = state.contacts.filter(contact => contact.id !== action.payload.id);
 
       },
       filterContact(state, action) {

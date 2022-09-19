@@ -1,40 +1,42 @@
-import { useState } from "react";
-import { nanoid } from "nanoid";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { addContact } from "redux/contactSlice";
+// import { nanoid } from "nanoid";
+import ContactList from "./ContactList/ContactList";
+import { ContactForm } from "./ContactForm/ContactForm";
 
 export function App() {
-  const [todos, setTodos] = useState([]);
-  const[text, setText] = useState('');
+  const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
 
-  const addTodo = () => {
-    if (text.trim().length) {
-      setTodos([
-        ...todos,
-        {
-          id: nanoid(),
-          text,
-        }
-      ])
-    }
-    setText('');
-  }
-
-  const removeTodo = (todoId) => {
-    setTodos(todos.filter(todo => todo.id !== todoId))
-  }
+  const formSubmit  = ({name, number}) => {
+        const findName = contacts.find(contact => 
+          contact.name.toLowerCase() === name.toLowerCase()
+        );
+        if (findName) {
+          return alert(`${name} is already in contacts.`);
+        };
+    
+        const findNumber = contacts.find(contact => 
+          contact.number === number
+        );
+        if (findNumber) {
+          return alert(`This phone number is already in use.`);
+        };
+    
+        dispatch(addContact({name, number}));
+        
+      }
+    
 
     return (
         <div>
-         <label>
-          <input value={text} onChange={(e) => setText(e.target.value)} />
-          <button onClick={addTodo}> Add todo</button>
-         </label>
+        <h1>Phonebook</h1>
+         <ContactForm onSubmit={formSubmit} />
 
-         <ul>
-          {todos.map(todo => <li key={todo.id}>
-            <span>{todo.text}</span>
-            <button type='button' onClick={() => removeTodo(todo.id)}>delete</button>
-          </li>)}
-         </ul>
+         <h2>Contacts</h2>
+
+        <ContactList /> 
         </div>
     );
 };

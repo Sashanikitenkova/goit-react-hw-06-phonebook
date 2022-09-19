@@ -1,37 +1,36 @@
+// import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import ContactItem from 'components/ContactItem/ContactItem';
 import s from './ContactList.module.css'
 
-const ContactList = ({ onClick}) => {
-    const contacts = useSelector(state => state.contacts.contacts.items);
+const ContactList = () => {
+    const contacts = useSelector(state => state.contacts.contacts);
+
     return (
         <ul className={s.contactList}>
-            {contacts.map(({id, name, number}) => (
-                <ContactItem 
-                    key={id} 
-                    id={id}
-                    name={name}
-                    number={number}
-                    onClick={onClick}
-                />
-        ))}
+           {
+            contacts.map(contact => 
+                 <ContactItem
+                       key={contact.id}
+                       {...contact}
+                 /> )
+           }
      </ul>
     )
 } 
 
 export default ContactList;
 
-ContactList.propTypes = {
-    contacts: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          number: PropTypes.string.isRequired,
-        })
-      ), 
-    onClick: PropTypes.func.isRequired,
-};
+// ContactList.propTypes = {
+//     contacts: PropTypes.arrayOf(
+//         PropTypes.shape({
+//           id: PropTypes.string.isRequired,
+//           name: PropTypes.string.isRequired,
+//           number: PropTypes.string.isRequired,
+//         })
+//       ), 
+//     onClick: PropTypes.func.isRequired,
+// };
 
 
 // import PropTypes from 'prop-types';
