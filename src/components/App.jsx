@@ -2,8 +2,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addContact } from "redux/contactSlice";
 // import { nanoid } from "nanoid";
-import ContactList from "./ContactList/ContactList";
 import { ContactForm } from "./ContactForm/ContactForm";
+import Filter from "./Filter/Filter";
+import ContactList from "./ContactList/ContactList";
 
 export function App() {
   const contacts = useSelector(state => state.contacts.contacts);
@@ -24,22 +25,30 @@ export function App() {
           return alert(`This phone number is already in use.`);
         };
     
-        dispatch(addContact({name, number}));
-        
+        dispatch(addContact({name, number})); 
       }
     
 
     return (
         <div>
+
         <h1>Phonebook</h1>
          <ContactForm onSubmit={formSubmit} />
 
          <h2>Contacts</h2>
 
+         <Filter />
+
         <ContactList /> 
+
         </div>
     );
 };
+
+
+
+
+
 
 
 // import React, {useState, useEffect} from "react";

@@ -6,13 +6,12 @@ import { nanoid } from "nanoid";
 
     initialState: {
       contacts: [],
+      filter: '',
     },
 
     reducers: {
       addContact(state, action) {
-        // console.log(state);
         console.log(action);
-
 
         state.contacts.push({ 
             id: nanoid(),
@@ -25,7 +24,9 @@ import { nanoid } from "nanoid";
 
       },
       filterContact(state, action) {
+        console.log(action);
 
+        state.filter = action.payload.value;
       },
       
       
