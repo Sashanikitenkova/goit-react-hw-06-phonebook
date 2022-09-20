@@ -27,7 +27,6 @@ export function App() {
     
         dispatch(addContact({name, number})); 
       }
-    
 
     return (
         <div>
