@@ -1,4 +1,3 @@
-// import { nanoid } from "nanoid";
 import { ContactForm } from "./ContactForm/ContactForm";
 import Filter from "./Filter/Filter";
 import ContactList from "./ContactList/ContactList";
@@ -12,7 +11,7 @@ export function App() {
          <ContactForm />
 
          <h2>Contacts</h2>
-         
+
          <Filter />
 
         <ContactList /> 
